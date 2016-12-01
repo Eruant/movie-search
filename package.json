@@ -4,7 +4,8 @@
   "description": "UI to search the Movie DB",
   "main": "server/index.js",
   "scripts": {
-    "test": "tap ./**/*.test.js"
+    "test": "tap ./**/*.test.js",
+    "test:watch": "nodemon -e js --exec \"npm test\""
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/Eruant/movie-search#readme",
   "dependencies": {
+    "nodemon": "^1.11.0",
     "tap": "^8.0.1"
   }
 }
