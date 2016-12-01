@@ -1,4 +1,12 @@
-const createBus = (defaultState = {}) => {
+const isRequired = require('./isRequired')
+
+const createBus = ({
+  reducers = isRequired({
+    category: 'createBus',
+    property: 'reducers'
+  }),
+  defaultState = {}
+} = {}) => {
   const state = defaultState
 
   const getState = () => state
