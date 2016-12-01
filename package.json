@@ -4,7 +4,7 @@
   "description": "UI to search the Movie DB",
   "main": "server/index.js",
   "scripts": {
-    "test": "tap ./**/*.test.js",
+    "test": "tap ./**/*.test.js --cov",
     "test:watch": "nodemon -e js --exec \"npm test\""
   },
   "repository": {
