@@ -1,5 +1,7 @@
 const reducerTypes = {
-  SEARCH_REQUEST: 'SEARCH_REQUEST'
+  SEARCH_REQUEST: 'SEARCH_REQUEST',
+  SEARCH_ERROR: 'SEARCH_ERROR',
+  SEARCH_SUCCESS: 'SEARCH_SUCCESS'
 }
 
 const reducers = (state, action) => {
@@ -10,6 +12,15 @@ const reducers = (state, action) => {
           isLoading: true
         })
       })
+
+    case reducerTypes.SEARCH_ERROR:
+      return Object.assign({}, state, {
+        search: Object.assign({}, state.search, {
+          isLoading: false,
+          error: action.error
+        })
+      })
+
     default:
       return Object.assign({}, state)
   }
