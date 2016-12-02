@@ -1,7 +1,16 @@
 const tap = require('tap')
 const {createBus} = require('./bus')
 
-const reducers = (state, action) => {}
+const reducers = (state, action) => {
+  switch (action.type) {
+    case 'SET_FOO':
+      return Object.assign({}, state, {
+        foo: action.value
+      })
+    default:
+      return Object.assign({}, state)
+  }
+}
 
 tap.test('bus: create a new bus', test => {
   try {
@@ -64,15 +73,23 @@ tap.test('bus: dispatching messages', test => {
   test.end()
 })
 
-// XXX reducers will need to be added before we can test this
-/*
 tap.test('bus: subscription callback', test => {
-  const bus = createBus({foo: 'bar'})
+  test.plan(1)
+
+  const bus = createBus({
+    reducers,
+    defaultState: {
+      foo: 'bar'
+    }
+  })
+  const action = {
+    type: 'SET_FOO',
+    value: 'baz'
+  }
 
   bus.subscribe(() => {
     test.equal(bus.getState().foo, 'baz', 'should return updated state')
   })
 
-  test.dispatch(action)
+  bus.dispatch(action)
 })
-*/

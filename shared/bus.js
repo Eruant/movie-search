@@ -7,12 +7,14 @@ const createBus = ({
   }),
   defaultState = {}
 } = {}) => {
-  const state = defaultState
+  let state = defaultState
+  const subscriptions = []
 
   const getState = () => state
 
-  const subscribe = () => {
+  const subscribe = (callback) => {
     const id = Math.random().toString(36).substring(12)
+    subscriptions.push({id, callback})
     return id
   }
 
@@ -20,6 +22,12 @@ const createBus = ({
     if (!action || !action.type) {
       throw new Error('dispatch requires an object with a type property')
     }
+
+    state = reducers(state, action)
+
+    subscriptions.forEach(subscription => {
+      subscription.callback()
+    })
   }
 
   return {
