@@ -1,3 +1,4 @@
+const isRequired = require('./isRequired')
 const {reducerTypes} = require('./reducers')
 
 const searchRequest = () => ({
@@ -15,7 +16,16 @@ const searchFailure = (error = 'Unknown search error') => {
   }
 }
 
+const searchSuccess = (data = isRequired({
+  category: 'searchSuccess',
+  property: 'data'
+})) => ({
+  data,
+  type: reducerTypes.SEARCH_SUCCESS
+})
+
 module.exports = {
   searchRequest,
-  searchFailure
+  searchFailure,
+  searchSuccess
 }

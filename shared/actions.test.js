@@ -1,7 +1,8 @@
 const tap = require('tap')
 const {
   searchRequest,
-  searchFailure
+  searchFailure,
+  searchSuccess
 } = require('./actions')
 const {reducerTypes} = require('./reducers')
 
@@ -27,6 +28,22 @@ tap.test('searchFailure', test => {
 
   test.equal(action.type, reducerTypes.SEARCH_FAILURE, 'should set the correct type')
   test.equal(action.error.message, 'bar', 'should set error from error object')
+
+  test.end()
+})
+
+tap.test('searchSuccess', test => {
+  try {
+    searchSuccess()
+    test.fail('no data entered warning not shown')
+  } catch (error) {
+    test.equal(error.message, '[searchSuccess] The property "data" is required')
+  }
+
+  const action = searchSuccess({foo: 'bar'})
+
+  test.equal(action.type, reducerTypes.SEARCH_SUCCESS, 'should set the correct type')
+  test.equal(action.data.foo, 'bar', 'should set correct data')
 
   test.end()
 })
