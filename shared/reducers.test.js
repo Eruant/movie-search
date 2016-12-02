@@ -6,7 +6,7 @@ const {
 
 tap.test('reducerTypes', test => {
   test.equal(reducerTypes.SEARCH_REQUEST, 'SEARCH_REQUEST')
-  test.equal(reducerTypes.SEARCH_ERROR, 'SEARCH_ERROR')
+  test.equal(reducerTypes.SEARCH_FAILURE, 'SEARCH_FAILURE')
   test.equal(reducerTypes.SEARCH_SUCCESS, 'SEARCH_SUCCESS')
 
   test.end()
@@ -47,7 +47,7 @@ tap.test('reducers: search request', test => {
   test.end()
 })
 
-tap.test('reducers: search error', test => {
+tap.test('reducers: search failure', test => {
   const defaultState = {
     search: {
       isLoading: true,
@@ -57,7 +57,7 @@ tap.test('reducers: search error', test => {
   }
 
   const action = {
-    type: reducerTypes.SEARCH_ERROR,
+    type: reducerTypes.SEARCH_FAILURE,
     error: new Error('foo')
   }
 
@@ -66,6 +66,31 @@ tap.test('reducers: search error', test => {
   test.equal(search.isLoading, false, 'should set isLoading to false')
   test.equal(search.data === null, true, 'data should remain null')
   test.equal(search.error.message, 'foo', 'should set error message')
+
+  test.end()
+})
+
+tap.test('reducers: search success', test => {
+  const defaultState = {
+    search: {
+      isLoading: true,
+      data: null,
+      error: 'not-null'
+    }
+  }
+
+  const action = {
+    type: reducerTypes.SEARCH_SUCCESS,
+    data: {
+      foo: 'bar'
+    }
+  }
+
+  const {search} = reducers(defaultState, action)
+
+  test.equal(search.isLoading, false, 'should set isLoading to false')
+  test.equal(search.data.foo, 'bar', 'data should be set')
+  test.equal(search.error === null, true, 'error should be set to null')
 
   test.end()
 })
