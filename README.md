@@ -17,7 +17,7 @@ Todo
 MVP
 
 - [x] build a messaging bus
-- [ ] create reducers to manage application state
+- [x] create reducers to manage application state
 - [ ] create actions to perform movie ajax requests
 - [ ] display results
 
