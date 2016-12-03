@@ -13,7 +13,7 @@ const createBus = ({
   const getState = () => state
 
   const subscribe = (callback) => {
-    const id = Math.random().toString(36).substring(12)
+    const id = Math.random().toString(36).substring(2)
     subscriptions.push({id, callback})
     return id
   }

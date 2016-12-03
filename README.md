@@ -3,27 +3,29 @@ Task
 
 Build a UI to search the Movie DB: The user should be able to enter some text into a search field, see and browse the results from the Movie DB.
 
-
-Links
+Setup
 -----
 
-- https://themoviedb.org/
-- http://docs.themoviedb.apiary.io/
-- https://github.com/cavestri/themoviedb-javascript-library/
+You will need `node 6` or `docker` installed.
 
-Todo
-----
+In development you can set up a `local.env` file using the `local.env.template` as a guide. You will need to add your own API key for `themoviedb`.
 
-MVP
+```bash
+# start a node 6 container (skip this if you are running node directly)
+docker run -i -v $(pwd):/app -w '/app' -t node:6 bash
 
-- [x] build a messaging bus
-- [x] create reducers to manage application state
-- [x] create actions
-- [x] create a store
-- [x] crete function to perform movie ajax request and dispatch actions
-- [x] build simple server to proxy ajax calls (and hide API keys)
-- [ ] display results
+# install modules
+npm install
 
-Addional features
+# build the client code
+npm run build
 
-- [ ] add filters to results
+# start the dev server
+npm run dev
+```
+
+Next steps
+----------
+
+- [ ] a filters to results
+- [ ] add pagination controls

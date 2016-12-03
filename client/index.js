@@ -1,3 +1,5 @@
+const moment = require('moment')
+
 const dataStore = require('../shared/dataStore')
 const search = require('../shared/search')
 
@@ -21,12 +23,53 @@ const init = () => {
       return
     }
 
-    console.log(search.data)
     const table = doc.createElement('table')
 
-    // TODO map data and display
+    search.data.results.forEach((result, index) => {
+      if (index === 0) {
+        const thead = doc.createElement('thead')
+        const tr = doc.createElement('tr')
 
-    results.innerHTML = ''
+        ;['Title', 'Released', 'Popularity'].map(field => {
+          const th = doc.createElement('th')
+          th.innerHTML = field
+          tr.appendChild(th)
+        })
+
+        thead.appendChild(tr)
+        table.appendChild(thead)
+      }
+
+      const tbody = doc.createElement('tbody')
+      const tr = doc.createElement('tr')
+
+      ;[
+        'original_title',
+        'release_date',
+        'popularity'
+      ].map(field => {
+        let value = result[field]
+
+        const td = doc.createElement('td')
+
+        if (/date/.test(field)) {
+          value = moment(value, 'YYYY-MM-DD').format('Do MMMM YYYY')
+        }
+
+        if (field === 'popularity') {
+          value = value.toFixed(2)
+        }
+
+        td.innerHTML = value
+
+        tr.appendChild(td)
+      })
+
+      tbody.appendChild(tr)
+      table.appendChild(tbody)
+    })
+
+    results.removeChild(results.childNodes[0])
     results.appendChild(table)
   })
 
