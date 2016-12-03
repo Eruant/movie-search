@@ -7,20 +7,36 @@ const doc = window.document
 const init = () => {
   doc.removeEventListener('DOMContentLoaded', init)
 
-  dataStore.subscribe(() => {
-    console.log(dataStore.getState())
-  })
-
+  // set up elements on the page
   const form = doc.createElement('form')
   const input = doc.createElement('input')
   const button = doc.createElement('button')
+  const results = doc.createElement('div')
 
+  // subscribe to data changes
+  dataStore.subscribe(() => {
+    const {search} = dataStore.getState()
+
+    if (search.isLoading) {
+      results.innerHTML = 'Fetching your results'
+      return
+    }
+
+    console.log(search.data)
+    const table = doc.createElement('table')
+
+    results.innerHTML = ''
+    results.appendChild(table)
+  })
+
+  // set up page
   button.innerHTML = 'Search'
 
   form.appendChild(input)
   form.appendChild(button)
 
   doc.body.appendChild(form)
+  doc.body.appendChild(results)
 
   const handleSubmit = event => {
     event.preventDefault()
