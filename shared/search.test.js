@@ -18,8 +18,10 @@ tap.test('search', test => {
 tap.test('search: dataStore updates (success)', test => {
   dataStore.reset()
 
-  nock('api.themoviedb.org')
-    .get('/3/search/movie')
+  const query = 'fantastic'
+
+  nock('*')
+    .get(`/api/search/${query}`)
     .reply(200)
 
   let counter = 0
@@ -43,5 +45,5 @@ tap.test('search: dataStore updates (success)', test => {
     counter++
   })
 
-  search('fantastic')
+  search(query)
 })

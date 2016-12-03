@@ -21,7 +21,7 @@ MVP
 - [x] create actions
 - [x] create a store
 - [x] crete function to perform movie ajax request and dispatch actions
-- [ ] build simple server to proxy ajax calls (and hide API keys)
+- [x] build simple server to proxy ajax calls (and hide API keys)
 - [ ] display results
 
 Addional features

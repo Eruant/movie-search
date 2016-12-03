@@ -14,15 +14,7 @@ module.exports = (query = isRequired({
 })) => {
   dataStore.dispatch(searchRequest())
 
-  const queryString = [
-    `api_key=${process.env.MOVIE_DB_API_KEY}`,
-    'language=en-UK',
-    `query=${query}`,
-    'page=1',
-    'include_adult=false'
-  ].join('&')
-
-  fetch(`https://api.themoviedb.org?${queryString}`)
+  fetch(`/api/search/${query}`)
     .then(response => {
       return {fake: 'response'}
     })
