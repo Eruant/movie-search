@@ -52,7 +52,11 @@ server.route([
     method: 'GET',
     path: '/',
     handler (request, reply) {
-      return reply('<!doctype html><script src=\'/resources/bundle.js\'></script>')
+      return reply(`
+        <!doctype html>
+        <link rel="stylesheet" type="text/css" href="/resources/main.css" />
+        <script src="/resources/bundle.js"></script>
+      `)
     }
   }
 ])

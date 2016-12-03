@@ -9,6 +9,7 @@ const init = () => {
   doc.removeEventListener('DOMContentLoaded', init)
 
   // set up elements on the page
+  const h1 = doc.createElement('h1')
   const form = doc.createElement('form')
   const input = doc.createElement('input')
   const button = doc.createElement('button')
@@ -24,15 +25,22 @@ const init = () => {
     }
 
     const table = doc.createElement('table')
+    const thead = doc.createElement('thead')
+    const tbody = doc.createElement('tbody')
+
+    const mappings = [
+      {key: 'original_title', value: 'Title'},
+      {key: 'release_date', value: 'Release date'},
+      {key: 'popularity', value: 'Popularity'}
+    ]
 
     search.data.results.forEach((result, index) => {
       if (index === 0) {
-        const thead = doc.createElement('thead')
         const tr = doc.createElement('tr')
 
-        ;['Title', 'Released', 'Popularity'].map(field => {
+        mappings.map(field => {
           const th = doc.createElement('th')
-          th.innerHTML = field
+          th.innerHTML = field.value
           tr.appendChild(th)
         })
 
@@ -40,23 +48,19 @@ const init = () => {
         table.appendChild(thead)
       }
 
-      const tbody = doc.createElement('tbody')
       const tr = doc.createElement('tr')
 
-      ;[
-        'original_title',
-        'release_date',
-        'popularity'
-      ].map(field => {
-        let value = result[field]
+      mappings.map(field => {
+        let value = result[field.key]
 
         const td = doc.createElement('td')
+        td.setAttribute('data-type', field.value)
 
-        if (/date/.test(field)) {
+        if (/date/.test(field.key)) {
           value = moment(value, 'YYYY-MM-DD').format('Do MMMM YYYY')
         }
 
-        if (field === 'popularity') {
+        if (field.key === 'popularity') {
           value = value.toFixed(2)
         }
 
@@ -66,19 +70,24 @@ const init = () => {
       })
 
       tbody.appendChild(tr)
-      table.appendChild(tbody)
     })
+
+    table.appendChild(tbody)
 
     results.removeChild(results.childNodes[0])
     results.appendChild(table)
   })
 
   // set up page
+  h1.innerHTML = 'Movie Search'
   button.innerHTML = 'Search'
+
+  document.title = 'Movie Search'
 
   form.appendChild(input)
   form.appendChild(button)
 
+  doc.body.appendChild(h1)
   doc.body.appendChild(form)
   doc.body.appendChild(results)
 
