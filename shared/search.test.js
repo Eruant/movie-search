@@ -1,6 +1,5 @@
 const tap = require('tap')
-// const {createBus} = require('./bus')
-// const {reducers} = require('./reducers')
+const dataStore = require('./dataStore')
 const search = require('./search')
 
 tap.test('search', test => {
@@ -14,15 +13,11 @@ tap.test('search', test => {
   test.end()
 })
 
-// TODO cannot do this until we have a store to test
-/*
 tap.test('search', test => {
-  const bus = createBus({reducers})
-
-  bus.subscribe(() => {
+  dataStore.subscribe(() => {
     test.pass('searching should trigger an action to be dispatched')
+    test.end()
   })
 
   search('fantastic')
 })
-*/
