@@ -4,8 +4,11 @@
   "description": "UI to search the Movie DB",
   "main": "server/index.js",
   "scripts": {
+    "build": "browserify client/index.js > static/bundle.js",
     "test": "tap ./**/*.test.js --cov",
-    "test:watch": "nodemon -e js --exec \"npm test\""
+    "test:watch": "nodemon -e js --exec \"npm test\"",
+    "dev": "export $(cat local.env | xargs) && nodemon server",
+    "start": "nodemon server"
   },
   "repository": {
     "type": "git",
@@ -18,6 +21,7 @@
   },
   "homepage": "https://github.com/Eruant/movie-search#readme",
   "dependencies": {
+    "browserify": "^13.1.1",
     "h2o2": "^5.4.0",
     "hapi": "^16.0.1",
     "inert": "^4.0.3",

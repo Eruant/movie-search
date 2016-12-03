@@ -24,7 +24,8 @@ server.route([
     method: 'GET',
     path: '/resources/{filename}',
     handler (request, reply) {
-      return reply.file(path.join(__dirname, 'static', request.params.filename))
+      const file = path.join('static', request.params.filename)
+      return reply.file(file)
     }
   },
   {
@@ -51,7 +52,7 @@ server.route([
     method: 'GET',
     path: '/',
     handler (request, reply) {
-      return reply('Testing')
+      return reply('<!doctype html><script src=\'/resources/bundle.js\'></script>')
     }
   }
 ])
