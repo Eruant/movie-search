@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Eruant/movie-search#readme",
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
+    "nock": "^9.0.2",
     "nodemon": "^1.11.0",
     "tap": "^8.0.1"
   }
