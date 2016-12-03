@@ -663,9 +663,7 @@ module.exports = (query = isRequired({
   dataStore.dispatch(searchRequest())
 
   fetch(`/api/search/${query}`)
-    .then(response => {
-      return {fake: 'response'}
-    })
+    .then(response => response.json())
     .then(data => {
       dataStore.dispatch(searchSuccess(data))
     })

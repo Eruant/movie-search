@@ -7,6 +7,7 @@
     "build": "browserify client/index.js > static/bundle.js",
     "test": "tap ./**/*.test.js --cov",
     "test:watch": "nodemon -e js --exec \"npm test\"",
+    "predev": "npm run build",
     "dev": "export $(cat local.env | xargs) && nodemon server",
     "start": "nodemon server"
   },
