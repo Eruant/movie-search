@@ -19,8 +19,9 @@ MVP
 - [x] build a messaging bus
 - [x] create reducers to manage application state
 - [x] create actions
-- [ ] create a store
-- [ ] crete function to perform movie ajax request and dispatch actions
+- [x] create a store
+- [x] crete function to perform movie ajax request and dispatch actions
+- [ ] build simple server to proxy ajax calls (and hide API keys)
 - [ ] display results
 
 Addional features
