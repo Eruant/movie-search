@@ -7,7 +7,7 @@ const createBus = ({
   }),
   defaultState = {}
 } = {}) => {
-  let state = defaultState
+  let state = Object.assign({}, defaultState)
   const subscriptions = []
 
   const getState = () => state
@@ -30,10 +30,19 @@ const createBus = ({
     })
   }
 
+  const reset = () => {
+    state = Object.assign({}, defaultState)
+
+    subscriptions.forEach(subscription => {
+      subscription.callback()
+    })
+  }
+
   return {
     getState,
     subscribe,
-    dispatch
+    dispatch,
+    reset
   }
 }
 

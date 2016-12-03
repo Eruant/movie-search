@@ -13,7 +13,7 @@ tap.test('search', test => {
   test.end()
 })
 
-tap.test('search', test => {
+tap.test('search: dataStore updates', test => {
   dataStore.subscribe(() => {
     test.pass('searching should trigger an action to be dispatched')
     test.end()
@@ -21,3 +21,5 @@ tap.test('search', test => {
 
   search('fantastic')
 })
+
+// TODO test that all actions are dispatched

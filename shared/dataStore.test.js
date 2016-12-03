@@ -1,5 +1,6 @@
 const tap = require('tap')
 const dataStore = require('./dataStore')
+const {searchRequest} = require('./actions')
 
 tap.test('dataStore', test => {
   test.equal(typeof dataStore, 'object', 'dataStore should be an object')

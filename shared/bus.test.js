@@ -93,3 +93,47 @@ tap.test('bus: subscription callback', test => {
 
   bus.dispatch(action)
 })
+
+tap.test('bus: reset', test => {
+  const initialState = {
+    foo: 'bar'
+  }
+
+  const bus = createBus({
+    reducers,
+    defaultState: initialState
+  })
+
+  let stage = 'initial'
+
+  const initialJSON = JSON.stringify(initialState)
+
+  bus.subscribe(() => {
+    const currentStateJSON = JSON.stringify(bus.getState())
+
+    switch (stage) {
+      case 'initial':
+        test.equal(
+          initialJSON !== currentStateJSON,
+          true,
+          'verify states are different'
+        )
+
+        stage = 'reset'
+        return
+      case 'reset':
+        test.equal(
+          initialJSON === currentStateJSON,
+          true,
+          'verify states are the same again'
+        )
+        test.end()
+        return
+    }
+  })
+
+  bus.dispatch({
+    type: 'SET_FOO'
+  })
+  bus.reset()
+})
