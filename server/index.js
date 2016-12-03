@@ -39,7 +39,7 @@ server.route([
           const query = '?' + [
             `api_key=${process.env.MOVIE_DB_API_KEY}`,
             'language=en-UK',
-            `query=${encodeURIComponent(query)}`,
+            `query=${encodeURIComponent(request.params.query)}`,
             `page=${encodeURIComponent(request.params.page) || 1}`,
             'include_adult=false'
           ].join('&')
